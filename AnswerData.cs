@@ -10,7 +10,6 @@ using System.IO;
 
 	public struct Word {
 		public string wordText;
-		public int PictureID;
 	}
 
 	
