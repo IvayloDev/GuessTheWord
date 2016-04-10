@@ -9,7 +9,7 @@ using System.IO;
 
 
 	public struct Word {
-		public string wordText;
+	public string wordText;
 	}
 
 	
@@ -17,6 +17,7 @@ using System.IO;
 	public class AnswerData {
 		[XmlArray("Words")]
 		[XmlArrayItem("Word")]
+
 
 
 	public List<Word> words = new List<Word>();
