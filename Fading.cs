@@ -24,7 +24,9 @@ public class Fading : MonoBehaviour {
 		fadeDir = direction;
 		return (fadeSpeed);
 	}
-	
+
+
+	//Called whenever a scene is loaded
 	void OnLevelWasLoaded(){
 		BeginFade(-1);
 	}

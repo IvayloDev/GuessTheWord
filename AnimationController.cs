@@ -9,6 +9,8 @@ public class AnimationController : MonoBehaviour {
 
 	void start() {
 
+		//Set all animations to default(false)
+
 		coinAnimator.SetBool("nextLevel",false);
 		bgAnimator.SetBool("nextLevel",false); 
 		ribbonAnimator.SetBool("nextLevel",false); 
@@ -23,9 +25,10 @@ public class AnimationController : MonoBehaviour {
 
 	void Update () {
 
+
 		if(AnswerManager.nextLevelActivated){
 
-
+			//Deactivate bool and set animations for ribbon and coins
 			AnswerManager.nextLevelActivated = false;
 
 			coinAnimator.SetBool("nextLevel",true);
@@ -33,6 +36,7 @@ public class AnimationController : MonoBehaviour {
 			ribbonAnimator.SetBool("nextLevel",true); 
 			textAnimator.SetBool("nextLevel",true); 
 
+			//Start coroutine for stopping animations
 			StartCoroutine(StopAnimations());
 
 		
@@ -43,14 +47,17 @@ public class AnimationController : MonoBehaviour {
 		IEnumerator StopAnimations() {
 
 		
-
+		//Wait 1.1 so the player can see the next level panel
 			yield return new WaitForSeconds(1.1f);
 
+
+		//Reset to default
 		coinAnimator.SetBool("nextLevel",false);
 		bgAnimator.SetBool("nextLevel",false); 
 		ribbonAnimator.SetBool("nextLevel",false); 
 		textAnimator.SetBool("nextLevel",false); 
 
+		//Panel fadeOut animations
 		coinAnimator.SetBool("removeLevel",true);
 		bgAnimator.SetBool("removeLevel",true); 
 		ribbonAnimator.SetBool("removeLevel",true); 
@@ -59,6 +66,8 @@ public class AnimationController : MonoBehaviour {
 
 		yield return new WaitForSeconds(1f);
 
+
+		//After all the animations are done, set bools to false so they are ready for next level activation
 		coinAnimator.SetBool("removeLevel",false);
 		bgAnimator.SetBool("removeLevel",false); 
 		ribbonAnimator.SetBool("removeLevel",false); 

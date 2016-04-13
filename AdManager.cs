@@ -11,14 +11,15 @@ public class AdManager : MonoBehaviour {
 	public static int adCount = 0;
 	
 	void Awake () {
+		//set up a banner
 		admob = GetComponent<AdMobPlugin>();
-		admob.CreateBanner(Banner_ID,AdMobPlugin.AdSize.SMART_BANNER,true, Interstitial_ID,true);
-		admob.RequestAd();
+		admob.CreateBanner(Banner_ID,AdMobPlugin.AdSize.SMART_BANNER,true, Interstitial_ID);
 
 	}
 	void Update () {
 
-		if(adCount == 2){
+		//check if adcount is 4, request ad and reset count
+		if(adCount == 4){
 			admob.RequestInterstitial();
 			adCount = 0;
 		}
@@ -39,6 +40,7 @@ public class AdManager : MonoBehaviour {
 	public void HandleInterstitialLoaded() {
 
 		if(AnswerManager.nextLevelActivated){
+			//when next level is activated, shop ad
 			admob.ShowInterstitial();
 		}
 	}

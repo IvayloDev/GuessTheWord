@@ -7,18 +7,20 @@ public class BackButtonBehaviour : MonoBehaviour {
 
 	void Update () {
 
-		Debug.LogError(disableShopBool);
-		Debug.LogError(ShopManager.isShopOn);
-
+		//On back button click
 		if(Input.GetKeyDown(KeyCode.Escape)){
 
+			//Check if shop is currently open and set bool to true
 			if(ShopManager.isShopOn){
 				disableShopBool = true;
 			}
 
+			//If player is in game scene and shop is closed, go to MainMenu
 			if(Application.loadedLevelName == "Game" && !ShopManager.isShopOn){
 				Application.LoadLevel("MainMenu");
 			}
+
+			//If player is in mainMenu and back is pressed, quit game
 			if(Application.loadedLevelName == "MainMenu"){
 			Application.Quit();
 			}
