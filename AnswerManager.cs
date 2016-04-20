@@ -155,8 +155,9 @@ public class AnswerManager : MonoBehaviour {
 
 	void Start () {
 
-		//get values from playerPrefs
-		r = PlayerPrefs.GetInt("R",0);
+
+        //get values from playerPrefs
+        r = PlayerPrefs.GetInt("R",0);
 		i = PlayerPrefs.GetInt("I",0);
 		CoinManagement.coins = PlayerPrefs.GetInt("coins",40);
 
@@ -203,6 +204,7 @@ public class AnswerManager : MonoBehaviour {
 
 		currentImage.sprite = Resources.Load(currentWord.wordText,typeof(Sprite)) as Sprite;
 		
+        WordLength = currentWord.wordText.ToString().Length;
 
 
 		//set guess transforms to initial position
@@ -229,23 +231,26 @@ public class AnswerManager : MonoBehaviour {
 			GO.SetActive(false);
 		}
 
-		WordLength = currentWord.wordText.ToString().Length;
 
 		for (int u = 0; u <= WordLength - 1; u++) {
 			PossibleLetters[u].SetActive(true);
 			
 		}
 
+
 		LettersToChooseFrom(BGAlphabet);
 
 
-		//END OF START
-	}
+        //END OF START
+
+
+
+    }
 
 
 
 
-	public void LettersToChooseFrom(string alphabet){
+    public void LettersToChooseFrom(string alphabet){
 
 		//convert the alphabet to characters
 		alphabet.ToCharArray();
@@ -281,7 +286,7 @@ public class AnswerManager : MonoBehaviour {
 			}
 	} 
 
-
+    
 	//new level coroutine.
 	IEnumerator NewLevelCor () {
 
@@ -478,13 +483,15 @@ public class AnswerManager : MonoBehaviour {
 					index--;
 					userInput = userInput.Replace(hit.transform.GetComponentInChildren<Text>().text, string.Empty);
 					stringIndex--;
-					PlaySound(2);
+					PlaySound(2); 
 					return;
 				}
 			
 
+
 				//if the the clicked box is not in top boxes, put it there, add tag, index++ make it smaller in size and play sound
 				if(index != WordLength && hit.transform.tag != "isTop"){
+					PlaySound(1);					
 					hit.transform.position = answerTransforms[index++].transform.position;
 					hit.transform.tag = "isTop";
 					hit.transform.GetComponent<RectTransform>().sizeDelta = answerTransforms[0].transform.GetComponent<RectTransform>().sizeDelta / 1.1f;
@@ -492,10 +499,9 @@ public class AnswerManager : MonoBehaviour {
 					if(userInput.Length != WordLength){
 					userInput = userInput.Insert(stringIndex++,hit.transform.GetComponentInChildren<Text>().text);
 					}
-						PlaySound(1);					
 				}
 					
-
+					
 				//this makes sure you cannot exceed the current word lenght
 				if(index >= WordLength){
 					
